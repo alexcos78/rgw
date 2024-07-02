@@ -2,10 +2,10 @@
 
 import boto3
 
-iam_client = boto3.client('iam', aws_access_key_id="RGWCNAFTB", aws_secret_access_key="HHpb1vMjWo7TVBUhWh3IaOsoElF1Tk3abtldphZ7", endpoint_url="https://ceph-osd01.cloud.cnaf.infn.it:7480", region_name='')
+iam_client = boto3.client('iam', aws_access_key_id="<USER_LOCAL>", aws_secret_access_key="<>", endpoint_url="https://<RGW_ENDPOINT>", region_name='')
 
 
-policy_document = '''{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":["arn:aws:iam:::oidc-provider/iam-pilota.cloud.cnaf.infn.it/"]},"Action":["sts:AssumeRoleWithWebIdentity","sts:TagSession"]}]}'''
+policy_document = '''{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":["arn:aws:iam:::oidc-provider/<IAM_hostname>/"]},"Action":["sts:AssumeRoleWithWebIdentity","sts:TagSession"]}]}'''
 
 role_response = iam_client.create_role(
     AssumeRolePolicyDocument=policy_document,
